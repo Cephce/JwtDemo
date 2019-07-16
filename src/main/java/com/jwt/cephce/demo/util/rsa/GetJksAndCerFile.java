@@ -11,6 +11,9 @@ import java.security.cert.CertificateFactory;
 import java.util.Enumeration;
 
 /**
+ * @author: cephce
+ * @date: 2019/10/15 15:00
+ *
  * 生成jks文件和cer证书文件，以及jks文件和cer文件的读取
  * https://blog.csdn.net/S_First/article/details/78701156
  *

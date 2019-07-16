@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author: zzx
- * @date: 2018/10/16 9:59
+ * @author: cephce
+ * @date: 2019/10/16 9:59
  * @description: 登出成功
  */
 @Component

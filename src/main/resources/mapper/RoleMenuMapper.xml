@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jwt.cephce.demo.dao.RoleMenuDao">
+  <resultMap id="BaseResultMap" type="com.jwt.cephce.demo.entity.RoleMenu">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, role_id, menu_url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role_menu
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="getListRoleMenuByUsername" parameterType="String" resultType="com.jwt.cephce.demo.entity.RoleMenu">
+        select a.*,c.* from (select * from user where username=#{username,jdbcType=VARCHAR} ) a
+        left join role_user b on a.Id=b.user_id
+        left join role_menu c on b.role_id=c.role_id
+   </select>
+
+  <select id="getListRoleMenuByRoleName" parameterType="String" resultType="com.jwt.cephce.demo.entity.RoleMenu">
+        select b.Id,b.role_id,b.menu_url  from (select Id from role where role_name=#{roleName,jdbcType=VARCHAR} ) a
+        left join role_menu b on a.id=b.role_id
+   </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from role_menu
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="Id" keyProperty="id" parameterType="com.jwt.cephce.demo.entity.RoleMenu" useGeneratedKeys="true">
+    insert into role_menu (role_id, menu_url)
+    values (#{roleId,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="Id" keyProperty="id" parameterType="com.jwt.cephce.demo.entity.RoleMenu" useGeneratedKeys="true">
+    insert into role_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="menuUrl != null">
+        menu_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jwt.cephce.demo.entity.RoleMenu">
+    update role_menu
+    <set>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        menu_url = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jwt.cephce.demo.entity.RoleMenu">
+    update role_menu
+    set role_id = #{roleId,jdbcType=VARCHAR},
+      menu_url = #{menuUrl,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -60,6 +60,8 @@ public class SpringSecurityConf extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()//定义哪些URL需要被保护、哪些不需要被保护
                 .antMatchers("/test/register")
                 .permitAll()
+                .antMatchers("/css/**","/js/**","/images/**","**/favicon.ico","/static/**")
+                .permitAll()
                 .anyRequest()//任何请求,登录后可以访问
                 .access("@rbacauthorityservice.hasPermission(request,authentication)") // RBAC 动态 url 认证
 

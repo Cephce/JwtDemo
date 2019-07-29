@@ -47,6 +47,8 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        response.setContentType("text/html;charset=utf-8");
+
         String authHeader = request.getHeader("Authorization");
 
         //获取请求的ip地址

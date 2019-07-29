@@ -5,6 +5,7 @@ import com.jwt.cephce.demo.service.UserService;
 import com.jwt.cephce.demo.util.ResultEnum;
 import com.jwt.cephce.demo.util.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +24,13 @@ public class UserController {
     @RequestMapping("/getUser")
     @ResponseBody
     public List<UserEntity> getUser(){
+        List<UserEntity> result = orderService.getUser();
+        return result;
+    }
+
+    @RequestMapping("/getUser2")
+    @ResponseBody
+    public List<UserEntity> getUser2(){
         List<UserEntity> result = orderService.getUser();
         return result;
     }
